@@ -1,15 +1,32 @@
 #ask user for a string
 puts "Enter a phrase you would like scrambled:"
-initial_phrase = gets.chomp
+$initial_phrase = gets.chomp
 
-#ask user for a number and convert to integer
+#ask user for a number
 puts "Enter a number to scramble the letters by:"
-scramble_num = gets.chomp.to_i
+
+#gets number and convert it to integer, 
+  #runs cipher if a number was entered,
+  #asks for a number again until one is entered.
+def run_program()
+  scramble_num = gets.chomp
+
+  if scramble_num == scramble_num.to_i.to_s
+    scramble_num = scramble_num.to_i
+    ceasar_cipher($initial_phrase, scramble_num)
+  else
+    puts "Enter a number please:"
+    run_program()
+  end
+end
 
 #method to check if number is greater than 25 and replace it with a number that corresponds to an index in alphabet array
 def get_new_num(n)
   if n > 25
     n = n-26*(n/26)
+  elsif n < -25
+    n = -(n)
+    n = -(n-26*(n/26))
   else
     n = n
   end
@@ -41,5 +58,5 @@ def ceasar_cipher(str, num)
   print "#{final_phrase}\n"
 end
 
-ceasar_cipher(initial_phrase, scramble_num)
+run_program()
 
