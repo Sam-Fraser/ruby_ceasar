@@ -32,8 +32,23 @@ alphabet = {
 puts "Enter a phrase you would like scrambled:"
 initial_phrase = gets.chomp
 
+#initialize final_phrase variable
+final_phrase = ""
+
 #ask user for a number and convert to integer
 puts "Enter a number to scramble the letters by:"
 scramble_num = gets.chomp.to_i
+
 #method to check if number is greater than 26 and replace it with a usable number less than 26
+def get_new_num(n)
+  if n > 26
+    n = n-26*(n/26)
+  else
+    n = n
+  end
+end
+
+puts get_new_num(scramble_num)
+
 #method to replace letter with a different letter that is 'x' letters away
+  #this will split the inital_phrase into an array and change each letter in the array according to the scramble_num before joining it back together
