@@ -1,3 +1,5 @@
+#lib/caesar.rb
+
 #ask user for a string
 puts "Enter a phrase you would like scrambled:"
 $initial_phrase = gets.chomp
@@ -13,11 +15,13 @@ def run_program()
 
   if scramble_num == scramble_num.to_i.to_s
     scramble_num = scramble_num.to_i
-    ceasar_cipher($initial_phrase, scramble_num)
+    final_phrase = caesar_cipher($initial_phrase, scramble_num)
   else
     puts "Enter a number please:"
     run_program()
   end
+  puts "Your scrambled text:"
+  print "#{final_phrase}\n"
 end
 
 #method to check if number is greater than 25 and replace it with a number that corresponds to an index in alphabet array
@@ -34,7 +38,7 @@ end
 
 #method to replace letter with a different letter that is 'x' letters away
   #this will split the inital_phrase into an array and change each letter in the array according to the scramble_num before joining it back together
-def ceasar_cipher(str, num)
+def caesar_cipher(str, num)
   #an array of all letters
   alphabet = ("a".."z").to_a
 
@@ -42,7 +46,7 @@ def ceasar_cipher(str, num)
   final_phrase = ""
 
   arr = str.split('')
-  new_arr = arr.each do |letter|
+  arr.each do |letter|
     case letter
     when "a".."z"
       displaced_num = num + alphabet.index(letter)
@@ -54,9 +58,8 @@ def ceasar_cipher(str, num)
       final_phrase += letter
     end
   end
-  puts "Your scrambled text:"
-  print "#{final_phrase}\n"
+  final_phrase
 end
 
-run_program()
+#run_program()
 
